@@ -1,4 +1,4 @@
-/*
+/* 
  * Copyright 2017 José A. Pacheco Ondoño - joanpaon@gmail.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,9 @@ package org.japo.java.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.Properties;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.japo.java.models.Model;
 import org.japo.java.views.View;
@@ -32,8 +34,11 @@ import org.japo.java.libraries.UtilesValidacion;
  */
 public class Controller {
 
-    // Fichero Propiedades
-    public static final String FICHERO = "app.properties";
+    // Propiedades Aplicación
+    public static final String PRP_FICHERO_DATOS = "fichero_datos";
+
+    // Fichero Propiedades Aplicación
+    public static final String FICHERO_PRP = "app.properties";
 
     // Referencias
     private final Model model;
@@ -48,7 +53,7 @@ public class Controller {
         this.view = view;
 
         // Cargar Propiedades Aplicación
-        this.prpApp = UtilesApp.cargarPropiedades(FICHERO);
+        this.prpApp = UtilesApp.cargarPropiedades(FICHERO_PRP);
 
         // *** Controlador de Persistencia ***
         this.dac = new DataAccessControllerPRP();
@@ -58,20 +63,26 @@ public class Controller {
     public void procesarImportacion(ActionEvent evt) {
         try {
             // Fichero de Datos
-            String fichero = prpApp.getProperty("fichero_datos");
+            String fichero = prpApp.getProperty(PRP_FICHERO_DATOS);
 
-            // Persistencia > Modelo
-            dac.importarModelo(model, fichero);
+            // Selección Fichero
+            JFileChooser selector = new JFileChooser(fichero);
 
-            // Modelo > Vista
-            sincronizarModeloVista(model, view);
+            // Análisis Selección Fichero
+            if (selector.showOpenDialog(view) == JFileChooser.APPROVE_OPTION) {
+                // Fichero Seleccionado
+                File f = selector.getSelectedFile();
 
-            // Validar Datos Importados > Vista
-            validarControlesSubjetivos(view);
+                // Persistencia > Modelo
+                dac.importarModelo(model, f.getAbsolutePath());
 
-            // Mensaje - Importación OK
-            String msg = "Datos importados correctamente";
-            JOptionPane.showMessageDialog(view, msg);
+                // Modelo > Vista
+                sincronizarModeloVista(model, view);
+
+                // Mensaje - Importación OK
+                String msg = "Datos importados correctamente";
+                JOptionPane.showMessageDialog(view, msg);
+            }
         } catch (Exception e) {
             // Mensaje - Importación NO
             String msg = "Error al importar los datos";
@@ -88,14 +99,23 @@ public class Controller {
                 sincronizarVistaModelo(view, model);
 
                 // Fichero de Datos
-                String fichero = prpApp.getProperty("fichero_datos");
+                String fichero = prpApp.getProperty(PRP_FICHERO_DATOS);
 
-                // Modelo > Persistencia
-                dac.exportarModelo(model, fichero);
+                // Selección Fichero
+                JFileChooser selector = new JFileChooser(fichero);
 
-                // Mensaje - Exportación OK
-                String msg = "Datos exportados correctamente";
-                JOptionPane.showMessageDialog(view, msg);
+                // Análisis Selección Fichero
+                if (selector.showSaveDialog(view) == JFileChooser.APPROVE_OPTION) {
+                    // Fichero Seleccionado
+                    File f = selector.getSelectedFile();
+
+                    // Modelo > Persistencia
+                    dac.exportarModelo(model, f.getAbsolutePath());
+
+                    // Mensaje - Exportación OK
+                    String msg = "Datos exportados correctamente";
+                    JOptionPane.showMessageDialog(view, msg);
+                }
             } catch (Exception e) {
                 // Mensaje - Exportación NO
                 String msg = "Error al exportar los datos";
@@ -107,7 +127,7 @@ public class Controller {
         }
     }
 
-    // Modelo > Vista 
+// Modelo > Vista 
     public void sincronizarModeloVista(Model model, View view) {
         view.txfNumero.setText(model.getNumero());
         view.txfSerie.setText(model.getSerie());
@@ -140,13 +160,13 @@ public class Controller {
     // Propiedades Vista > Estado Vista
     public void restaurarEstadoVista(View view, Properties prp) {
         // Establecer Favicon
-        UtilesSwing.establecerFavicon(view, prp.getProperty("ruta_favicon"));
+        UtilesSwing.establecerFavicon(view, prp.getProperty(View.PRP_RUTA_FAVICON, "img/favicon.png"));
 
         // Establece Lnf
-        UtilesSwing.establecerLnF(prp.getProperty("lnf", UtilesSwing.WINDOWS));
+        UtilesSwing.establecerLnF(prp.getProperty(View.PRP_LOOK_AND_FEEL, UtilesSwing.WINDOWS));
 
         // Activa Singleton
-        if (!UtilesApp.activarInstancia(prp.getProperty("puerto_bloqueo", UtilesApp.PUERTO_BLOQUEO))) {
+        if (!UtilesApp.activarInstancia(prp.getProperty(View.PRP_PUERTO_BLOQUEO, UtilesApp.PUERTO_BLOQUEO))) {
             UtilesSwing.terminarPrograma(view);
         }
 

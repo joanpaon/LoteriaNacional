@@ -1,4 +1,4 @@
-/*
+/* 
  * Copyright 2017 José A. Pacheco Ondoño - joanpaon@gmail.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,7 +50,7 @@ public class DataAccessControllerSXML implements IDataAccessController {
     }
 
     // Modelo > Modelo
-    public void convertirModeloModelo(Model modeloIni, Model modeloFin) {
+    public void convertirModeloModelo(Model modeloIni, Model modeloFin) throws Exception {
 
     }
 }

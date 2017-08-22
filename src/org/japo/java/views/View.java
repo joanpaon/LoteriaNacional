@@ -1,4 +1,4 @@
-/*
+/* 
  * Copyright 2017 José A. Pacheco Ondoño - joanpaon@gmail.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,8 +27,12 @@ import org.japo.java.models.Model;
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
 public class View extends javax.swing.JFrame {
+    // Propiedades Vista
+    public static final String PRP_PUERTO_BLOQUEO = "puerto_bloqueo";
+    public static final String PRP_LOOK_AND_FEEL = "lnf";
+    public static final String PRP_RUTA_FAVICON = "ruta_favicon";
 
-    // Fichero Propiedades
+    // Fichero Propiedades Vista
     public static final String FICHERO = "view.properties";
 
     // Referencias
@@ -379,7 +383,7 @@ public class View extends javax.swing.JFrame {
         control.sincronizarModeloVista(model, this);
 
         // Enfocar Control Inicial
-        btnImportar.requestFocus();
+        txfNumero.requestFocus();
 
         // Otras inicializaciones
     }
