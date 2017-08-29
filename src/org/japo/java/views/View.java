@@ -27,6 +27,7 @@ import org.japo.java.models.Model;
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
 public class View extends javax.swing.JFrame {
+
     // Propiedades Vista
     public static final String PRP_PUERTO_BLOQUEO = "puerto_bloqueo";
     public static final String PRP_LOOK_AND_FEEL = "lnf";
@@ -75,12 +76,12 @@ public class View extends javax.swing.JFrame {
         lblSerie = new javax.swing.JLabel();
         txfSerie = new javax.swing.JTextField();
         lblFraccion = new javax.swing.JLabel();
-        cbbFraccion = new javax.swing.JComboBox();
+        cbbFraccion = new javax.swing.JComboBox<>();
         lblFecha = new javax.swing.JLabel();
         txfFecha = new javax.swing.JTextField();
         lblPrecio = new javax.swing.JLabel();
         txfPrecio = new javax.swing.JTextField();
-        pnlControl = new javax.swing.JPanel();
+        pnlControles = new javax.swing.JPanel();
         btnImportar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
 
@@ -93,12 +94,12 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        pnlDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 12), java.awt.Color.blue)); // NOI18N
+        pnlDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), java.awt.Color.blue)); // NOI18N
 
-        lblNumero.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lblNumero.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         lblNumero.setText("Número");
 
-        txfNumero.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        txfNumero.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         txfNumero.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txfNumero.setText("00000");
         txfNumero.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -109,13 +110,18 @@ public class View extends javax.swing.JFrame {
                 txfNumeroFocusLost(evt);
             }
         });
+        txfNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfNumeroActionPerformed(evt);
+            }
+        });
 
-        lblSerie.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lblSerie.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         lblSerie.setText("Serie");
 
-        txfSerie.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        txfSerie.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         txfSerie.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txfSerie.setText("000");
+        txfSerie.setText("0");
         txfSerie.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txfSerieFocusGained(evt);
@@ -124,19 +130,37 @@ public class View extends javax.swing.JFrame {
                 txfSerieFocusLost(evt);
             }
         });
+        txfSerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfSerieActionPerformed(evt);
+            }
+        });
 
-        lblFraccion.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lblFraccion.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         lblFraccion.setText("Fracción");
 
-        cbbFraccion.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        cbbFraccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        cbbFraccion.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        cbbFraccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        cbbFraccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbbFraccionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbbFraccionFocusLost(evt);
+            }
+        });
+        cbbFraccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbFraccionActionPerformed(evt);
+            }
+        });
 
-        lblFecha.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lblFecha.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         lblFecha.setText("Fecha");
 
-        txfFecha.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        txfFecha.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         txfFecha.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txfFecha.setText("01/01/1970");
+        txfFecha.setText("31/08/2017");
         txfFecha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txfFechaFocusGained(evt);
@@ -145,19 +169,29 @@ public class View extends javax.swing.JFrame {
                 txfFechaFocusLost(evt);
             }
         });
+        txfFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfFechaActionPerformed(evt);
+            }
+        });
 
-        lblPrecio.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lblPrecio.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         lblPrecio.setText("Precio");
 
-        txfPrecio.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        txfPrecio.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         txfPrecio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txfPrecio.setText("20.00");
+        txfPrecio.setText("0");
         txfPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txfPrecioFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txfPrecioFocusLost(evt);
+            }
+        });
+        txfPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfPrecioActionPerformed(evt);
             }
         });
 
@@ -167,31 +201,33 @@ public class View extends javax.swing.JFrame {
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addComponent(lblNumero)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addComponent(lblFecha)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addComponent(lblSerie)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblFraccion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbbFraccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addComponent(lblFraccion)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbbFraccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addComponent(lblPrecio)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlDatosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbbFraccion, lblFecha, lblFraccion, lblNumero, lblPrecio, lblSerie, txfFecha, txfNumero, txfPrecio, txfSerie});
+        pnlDatosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txfFecha, txfNumero, txfPrecio, txfSerie});
+
+        pnlDatosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblFecha, lblFraccion, lblNumero, lblPrecio, lblSerie});
 
         pnlDatosLayout.setVerticalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,9 +245,9 @@ public class View extends javax.swing.JFrame {
                     .addComponent(lblFraccion)
                     .addComponent(cbbFraccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFecha)
-                    .addComponent(txfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrecio)
@@ -219,20 +255,19 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlDatosLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbbFraccion, lblFecha, lblFraccion, lblNumero, lblPrecio, lblSerie, txfFecha, txfNumero, txfPrecio, txfSerie});
+        pnlDatosLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblFecha, lblFraccion, lblNumero, lblPrecio, lblSerie, txfFecha, txfNumero, txfPrecio, txfSerie});
 
-        pnlControl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 12), java.awt.Color.blue)); // NOI18N
+        pnlControles.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), java.awt.Color.blue)); // NOI18N
 
-        btnImportar.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        btnImportar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         btnImportar.setText("Importar");
-        btnImportar.setPreferredSize(new java.awt.Dimension(106, 30));
         btnImportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImportarActionPerformed(evt);
             }
         });
 
-        btnExportar.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        btnExportar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         btnExportar.setText("Exportar");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,31 +275,26 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout pnlControlLayout = new javax.swing.GroupLayout(pnlControl);
-        pnlControl.setLayout(pnlControlLayout);
-        pnlControlLayout.setHorizontalGroup(
-            pnlControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlControlLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnExportar)
-                .addGap(20, 20, 20))
-        );
-
-        pnlControlLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnExportar, btnImportar});
-
-        pnlControlLayout.setVerticalGroup(
-            pnlControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlControlLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlControlesLayout = new javax.swing.GroupLayout(pnlControles);
+        pnlControles.setLayout(pnlControlesLayout);
+        pnlControlesLayout.setHorizontalGroup(
+            pnlControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControlesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlControlesLayout.setVerticalGroup(
+            pnlControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlControlesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnImportar)
                     .addComponent(btnExportar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        pnlControlLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnExportar, btnImportar});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,7 +304,7 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -283,13 +313,17 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        control.procesarCierreVista(evt);
+    }//GEN-LAST:event_formWindowClosing
 
     private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
         control.procesarImportacion(evt);
@@ -298,6 +332,26 @@ public class View extends javax.swing.JFrame {
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         control.procesarExportacion(evt);
     }//GEN-LAST:event_btnExportarActionPerformed
+
+    private void txfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNumeroActionPerformed
+        txfSerie.requestFocus();
+    }//GEN-LAST:event_txfNumeroActionPerformed
+
+    private void txfSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfSerieActionPerformed
+        cbbFraccion.requestFocus();
+    }//GEN-LAST:event_txfSerieActionPerformed
+
+    private void cbbFraccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbFraccionActionPerformed
+        txfFecha.requestFocus();
+    }//GEN-LAST:event_cbbFraccionActionPerformed
+
+    private void txfFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFechaActionPerformed
+        txfSerie.requestFocus();
+    }//GEN-LAST:event_txfFechaActionPerformed
+
+    private void txfPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPrecioActionPerformed
+        btnExportar.requestFocus();
+    }//GEN-LAST:event_txfPrecioActionPerformed
 
     private void txfNumeroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfNumeroFocusGained
         txfNumero.setForeground(Color.BLACK);
@@ -308,6 +362,10 @@ public class View extends javax.swing.JFrame {
         txfSerie.setForeground(Color.BLACK);
         txfSerie.setBackground(Color.CYAN);
     }//GEN-LAST:event_txfSerieFocusGained
+
+    private void cbbFraccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbbFraccionFocusGained
+        cbbFraccion.setBackground(Color.CYAN);
+    }//GEN-LAST:event_cbbFraccionFocusGained
 
     private void txfFechaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfFechaFocusGained
         txfFecha.setForeground(Color.BLACK);
@@ -320,39 +378,39 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_txfPrecioFocusGained
 
     private void txfNumeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfNumeroFocusLost
+        UtilesValidacion.validarCampoTexto(txfNumero, Model.ER_NUMERO, "?");
         txfNumero.setBackground(Color.WHITE);
-        UtilesValidacion.validarCampoTexto(txfNumero, Model.ER_NUMERO, "*");
     }//GEN-LAST:event_txfNumeroFocusLost
 
     private void txfSerieFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfSerieFocusLost
+        UtilesValidacion.validarCampoTexto(txfSerie, Model.ER_SERIE, "?");
         txfSerie.setBackground(Color.WHITE);
-        UtilesValidacion.validarCampoTexto(txfSerie, Model.ER_SERIE, "*");
     }//GEN-LAST:event_txfSerieFocusLost
 
+    private void cbbFraccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbbFraccionFocusLost
+        cbbFraccion.setBackground(Color.WHITE);
+    }//GEN-LAST:event_cbbFraccionFocusLost
+
     private void txfFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfFechaFocusLost
+        UtilesValidacion.validarCampoFecha(txfFecha, "?");
         txfFecha.setBackground(Color.WHITE);
-        UtilesValidacion.validarCampoFecha(txfFecha, "*");
     }//GEN-LAST:event_txfFechaFocusLost
 
     private void txfPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfPrecioFocusLost
+        UtilesValidacion.validarCampoTexto(txfPrecio, Model.ER_PRECIO, "?");
         txfPrecio.setBackground(Color.WHITE);
-        UtilesValidacion.validarCampoTexto(txfPrecio, Model.ER_PRECIO, "*");
     }//GEN-LAST:event_txfPrecioFocusLost
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        control.procesarCierreVista(evt);
-    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnImportar;
-    public javax.swing.JComboBox cbbFraccion;
+    public javax.swing.JComboBox<String> cbbFraccion;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFraccion;
     private javax.swing.JLabel lblNumero;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblSerie;
-    private javax.swing.JPanel pnlControl;
+    private javax.swing.JPanel pnlControles;
     private javax.swing.JPanel pnlDatos;
     public javax.swing.JTextField txfFecha;
     public javax.swing.JTextField txfNumero;

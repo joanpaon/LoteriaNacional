@@ -70,17 +70,32 @@ public class UtilesSwing {
     }
 
     // Establecer LnF
-    public static void establecerLnF(String lnf) {
+    public static boolean establecerLnF(String lnf) {
+        // Semáforo
+        boolean procesoOK = false;
+
         try {
+            // Instala LnF
             UIManager.setLookAndFeel(lnf);
+
+            // Actualiza semáforo
+            procesoOK = true;
         } catch (ClassNotFoundException | IllegalAccessException
                 | InstantiationException | UnsupportedLookAndFeelException e) {
-            System.out.println(e.getLocalizedMessage());
+            System.out.println("ERROR: Instalación del LnF");
         }
+
+        // Devuelve semáforo
+        return procesoOK;
     }
 
     // Escalar/Asignar Image > Etiqueta
-    public static void asignarImagenEscalada(JLabel lblImagen, Image imgOriginal) {
+    public static boolean asignarImagenEscalada(JLabel lblImagen, Image imgOriginal) {
+        // Semáforo
+        boolean procesoOK = false;
+
+        try {
+
         // Obtiene la imagen escalada
         Image imgEscalada = imgOriginal.getScaledInstance(
                 lblImagen.getSize().width,
@@ -92,6 +107,15 @@ public class UtilesSwing {
 
         // Icon > Etiqueta Imagen
         lblImagen.setIcon(i);
+
+            // Actualiza semáforo
+            procesoOK = true;
+        } catch (Exception e) {
+            System.out.println("ERROR: Reescalar/Asignar imagen a etiqueta");
+    }
+
+        // Devuelve semáforo
+        return procesoOK;
     }
 
     // Obtiene el texto copiado al portapapeles
@@ -110,7 +134,7 @@ public class UtilesSwing {
             // Extrae texto del portapapeles
             result = (String) contents.getTransferData(DataFlavor.stringFlavor);
         } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-            System.out.println(e);
+            System.out.println("ERROR: Lectura del portapapeles");
         }
 
         // Texto extraido
@@ -118,7 +142,11 @@ public class UtilesSwing {
     }
 
     // Coloca texto en el portapapeles
-    public static void ponerTextoPortapapeles(String texto, ClipboardOwner propietario) {
+    public static boolean ponerTextoPortapapeles(String texto, ClipboardOwner propietario) {
+        // Semáforo
+        boolean procesoOK = false;
+
+        try {
         // Entidad que implementa la capacidad de transmitir texto
         StringSelection transmisor = new StringSelection(texto);
 
@@ -127,6 +155,15 @@ public class UtilesSwing {
 
         // Transmisión de texto
         clipboard.setContents(transmisor, propietario);
+
+            // Actualiza semáforo
+            procesoOK = true;
+        } catch (HeadlessException e) {
+            System.out.println("ERROR: Escritura en el portapapeles");
+    }
+
+        // Devuelve semáforo
+        return procesoOK;
     }
 
     // Cambiar valor sin disparar Eventos de Ajuste
@@ -201,7 +238,7 @@ public class UtilesSwing {
             // URL Favicon > Ventana Favicon
             ventana.setIconImage(new ImageIcon(urlICN).getImage());
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("ERROR: Instalación del icono de la ventana");
         }
     }
 }

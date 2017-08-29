@@ -55,6 +55,7 @@ public class Model implements Serializable {
     private String fecha;
     private String precio;
 
+    // Constructor Predeterminado
     public Model() {
         numero = DEF_NUMERO;
         serie = DEF_SERIE;
@@ -64,8 +65,7 @@ public class Model implements Serializable {
     }
 
     // Constructor Parametrizado
-    public Model(String numero, String serie, String fraccion,
-            String fecha, String precio) {
+    public Model(String numero, String serie, String fraccion, String fecha, String precio) {
         // Número
         if (UtilesValidacion.validarDato(numero, ER_NUMERO)) {
             this.numero = numero;

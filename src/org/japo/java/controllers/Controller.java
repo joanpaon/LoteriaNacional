@@ -166,7 +166,7 @@ public class Controller {
         UtilesSwing.establecerLnF(prp.getProperty(View.PRP_LOOK_AND_FEEL, UtilesSwing.WINDOWS));
 
         // Activa Singleton
-        if (!UtilesApp.activarInstancia(prp.getProperty(View.PRP_PUERTO_BLOQUEO, UtilesApp.PUERTO_BLOQUEO))) {
+        if (!UtilesApp.activarInstancia(prp.getProperty(View.PRP_PUERTO_BLOQUEO, UtilesApp.DEF_PUERTO_BLOQUEO))) {
             UtilesSwing.terminarPrograma(view);
         }
 

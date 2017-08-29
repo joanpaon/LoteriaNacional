@@ -27,15 +27,13 @@ import java.util.Properties;
  */
 public class UtilesApp {
 
-    // Fichero de propiedades
-    public static final String FICHERO_PRP_APP = "app.properties";
-
-    // Puerto de Bloqueo por Defecto
-    public static final String PUERTO_BLOQUEO = "54321";
+    // Valores por Defecto
+    public static final String DEF_FICHERO_PRP = "app.properties";
+    public static final String DEF_PUERTO_BLOQUEO = "54321";
 
     // Fichero (Por defecto) > Propiedades    
     public static Properties cargarPropiedades() {
-        return cargarPropiedades(FICHERO_PRP_APP);
+        return cargarPropiedades(DEF_FICHERO_PRP);
     }
 
     // Fichero Propiedades > Objeto Propiedades
@@ -47,7 +45,7 @@ public class UtilesApp {
         try (FileReader fr = new FileReader(rutaFichero)) {
             prp.load(fr);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("ERROR: Acceso al fichero " + rutaFichero);
         }
 
         // Devolver Propiedades
@@ -56,7 +54,7 @@ public class UtilesApp {
 
     // Propiedades > Fichero (Por defecto)
     public static boolean guardarPropiedades(Properties prp) {
-        return guardarPropiedades(prp, FICHERO_PRP_APP);
+        return guardarPropiedades(prp, DEF_FICHERO_PRP);
     }
 
     // Propiedades > Fichero
@@ -87,7 +85,7 @@ public class UtilesApp {
 
         try {
             // Obtener dato
-            String dato = prp.getProperty("puerto_bloqueo", PUERTO_BLOQUEO);
+            String dato = prp.getProperty("puerto_bloqueo", DEF_PUERTO_BLOQUEO);
 
             // Puerto de bloqueo
             int puerto = Integer.parseInt(dato);
@@ -98,8 +96,7 @@ public class UtilesApp {
             // Marca Semáforo
             instanciaOK = true;
         } catch (IOException | NumberFormatException e) {
-            // Mensaje Informativo
-            System.out.println(e);
+            System.out.println("ERROR: Activación ejecución única");
         }
 
         // Devuelve Estado
@@ -121,8 +118,7 @@ public class UtilesApp {
             // Marca Semáforo
             instanciaOK = true;
         } catch (IOException | NumberFormatException e) {
-            // Mensaje Informativo
-            System.out.println(e);
+            System.out.println("ERROR: Activación ejecución única");
         }
 
         // Devuelve Estado
